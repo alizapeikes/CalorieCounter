@@ -16,7 +16,7 @@ public class Main {
 		double weight = keyboard.nextDouble();
 		keyboard.nextLine();
 		
-		System.out.print("User's Gender: choose M/F");
+		System.out.print("User's Gender (M/F): ");
 		String gend = keyboard.nextLine();
 		Gender gender;
 		
@@ -55,7 +55,7 @@ public class Main {
 		}
 		
 		Person person = new Person(name, age, height, weight, gender, exercise);
-		System.out.println("Recommended Diet: " + person.getDiet());
+		System.out.println("Recommended Diet:\n" + person.getDiet());
 	
 		
 	}

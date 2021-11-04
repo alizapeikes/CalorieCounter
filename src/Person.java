@@ -71,11 +71,18 @@ public class Person {
 	
 	public void setBMR() {
 		if(gender == Gender.MALE) {
-			BMR = 66 + (6.23 * weight) + (12.7 *height) - (6.8 * age);
+			BMR = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
 		}else {
 			BMR = 665 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
 		}
 	}
+	
+	/*
+	 * https://www.calculator.net/calorie-calculator.html?ctype=standard&cage=70&csex=f&cheightfeet=5&cheightinch=6&cpound=160&cheightmeter=180&ckg=65&cactivity=1.375&cmop=0&coutunit=c&cformula=m&cfatpct=20&printit=0&x=94&y=22
+	 * we are going to display all the different diet option before we display the recommended diet.
+	 * We want to make a while loop for the duration of the diet
+	 * every new day, the total calories restarts from zero. 
+	 */
 	
 
 }
