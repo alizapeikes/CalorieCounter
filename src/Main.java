@@ -6,17 +6,34 @@ public class Main {
 		System.out.print("User's name: ");
 		String name = keyboard.nextLine();
 		
-		System.out.println("User's age: ");
+		System.out.print("User's age: ");
 		int age = keyboard.nextInt();
 		
-		System.out.println("User's height: ");
+		System.out.print("User's height (inches): ");
 		double height = keyboard.nextDouble();
 		
-		System.out.println("User's weight: ");
+		System.out.print("User's weight (pounds): ");
 		double weight = keyboard.nextDouble();
+		keyboard.nextLine();
+		
+		System.out.print("User's Gender: choose M/F");
+		String gend = keyboard.nextLine();
+		Gender gender;
+		
+		while(!gend.equals("m") && !gend.equals("f")) {
+			System.out.println("Please enter 'm' or 'f'");
+			gend = keyboard.nextLine();
+		}
+		if(gend.equalsIgnoreCase("m")) {
+			gender = Gender.MALE;
+		}
+		else {
+			gender = Gender.FEMALE;
+		}
+		
 		
 		menu();
-		System.out.println("Choose a category number: ");
+		System.out.print("Choose a category number: ");
 		Exercise exercise = Exercise.LITTLE;
 		int choice = keyboard.nextInt();
 		switch(choice) {
@@ -37,13 +54,14 @@ public class Main {
 				break;
 		}
 		
-		Person person = new Person(name, age, height, weight, exercise);
+		Person person = new Person(name, age, height, weight, gender, exercise);
+		System.out.println("Recommended Diet: " + person.getDiet());
 	
 		
 	}
 	
 	public static void menu() {
-		System.out.println("Exercise Options:");
+		System.out.println("Standard Daily Exercise:");
 		System.out.println("1. Little(to no exercise)");
 		System.out.println("2. Light(1-3 days per week)");
 		System.out.println("3. Moderate(3-5 days per week)");

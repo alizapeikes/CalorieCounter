@@ -5,18 +5,19 @@ public class Person {
 	private int age;
 	private double height;
 	private double weight;
-	private Diet dietName;
+	private Diet diet;
 	private double BMI;
 	private Gender gender;
 	private double BMR;
 	private Exercise exercise;
 	private double caloriesNeeded;
 	
-	public Person(String name, int age, double height, double weight, Exercise exercise) {
+	public Person(String name, int age, double height, double weight, Gender gender, Exercise exercise) {
 		this.name = name;
 		this.age = age;
 		this.height = height;
 		this.weight = weight;
+		this.gender = gender;
 		this.exercise = exercise;
 		setBMI();
 		setBMR();
@@ -37,7 +38,7 @@ public class Person {
 				caloriesNeeded = BMR * 1.725;
 				break;
 			case VERY_HEAVY:
-				caloriesNeeded= BMR * 2;
+				caloriesNeeded = BMR * 2;
 				break;
 			
 		}
@@ -45,19 +46,22 @@ public class Person {
 	}
 	
 	public Diet getDiet() {
+		setCaloriesNeeded();
 
 		if(BMI < 18.5) {
-			if(gender == Gender.FEMALE) {
-				 dietName = new Diet("UnderWeight", 10, 100);
-			}else {
-				
-			}
-		}else if(BMI < 24.9) {
-		}else if(BMI < 29.9) {
-			
-		}else {
-			
+			diet = new Diet("Weight Gain", Math.round((float)(caloriesNeeded * 1.2)));
 		}
+		else if(BMI < 24.9) {
+			diet = new Diet("Maintenance", Math.round((float)(caloriesNeeded)));
+		}
+		else if(BMI < 29.9) {
+			diet = new Diet("Weight Loss", Math.round((float)(caloriesNeeded * .8)));
+		}
+		else {
+			diet = new Diet("Extreme Weight Loss", Math.round((float)(caloriesNeeded * .6)));
+		}
+		
+		return diet;
 	}
 	
 	public void setBMI() { 
