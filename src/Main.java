@@ -55,7 +55,23 @@ public class Main {
 		}
 		
 		Person person = new Person(name, age, height, weight, gender, exercise);
-		System.out.println("Recommended Diet:\n" + person.getDiet());
+		person.setDiet();
+		System.out.println("\nWe have four diet options available");
+		System.out.println("1. Weight Gain \n2. Maintenance \n3. Weight Loss \n4. Extreme weight loss");
+		System.out.println("We recommended: " + person.getDiet());
+		System.out.println("Choose which diet number you wish to start with");
+		int recommendedDiet = person.getDiet().getDietNumber();
+		int dietChoice = keyboard.nextInt();
+		while(dietChoice < 1 || dietChoice > 4) {
+			System.out.println("Please choose numbers 1-4 as they correspond to the diets");
+			dietChoice = keyboard.nextInt();
+		}
+		System.out.println("rd" + recommendedDiet + " dc" + dietChoice);
+		if(dietChoice != recommendedDiet) {
+			person.getDiet().setDiet(dietChoice);	
+		}
+		System.out.println(person.getDiet().toString());
+		
 	
 		
 	}

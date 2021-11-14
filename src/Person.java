@@ -39,28 +39,18 @@ public class Person {
 				break;
 			case VERY_HEAVY:
 				caloriesNeeded = BMR * 2;
-				break;
-			
+				break;		
 		}
 			
 	}
 	
-	public Diet getDiet() {
+	public void setDiet() {
 		setCaloriesNeeded();
-
-		if(BMI < 18.5) {
-			diet = new Diet("Weight Gain", Math.round((float)(caloriesNeeded * 1.2)));
-		}
-		else if(BMI < 24.9) {
-			diet = new Diet("Maintenance", Math.round((float)(caloriesNeeded)));
-		}
-		else if(BMI < 29.9) {
-			diet = new Diet("Weight Loss", Math.round((float)(caloriesNeeded * .8)));
-		}
-		else {
-			diet = new Diet("Extreme Weight Loss", Math.round((float)(caloriesNeeded * .6)));
-		}
-		
+		diet = new Diet();
+		diet.setRecommendedDiet(BMI, caloriesNeeded);
+	}
+	
+	public Diet getDiet() {
 		return diet;
 	}
 	
