@@ -1,4 +1,3 @@
-
 public class Diet {
 
 	private double BMI;
