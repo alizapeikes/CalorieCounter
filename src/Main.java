@@ -8,7 +8,7 @@ public class Main {
 		person.setDiet();
 		
 		chooseDiet(keyboard,person);
-		System.out.println(person.getDiet().toString());
+		System.out.println("\n" + person.getDiet().toString());
 		
 		calorieCounter(keyboard, person);
 
@@ -109,8 +109,8 @@ public class Main {
 	public static void chooseDiet(Scanner keyboard, Person person) {
 		System.out.println("\nWe have four diet options available");
 		System.out.println("1. Weight Gain \n2. Maintenance \n3. Weight Loss \n4. Extreme weight loss");
-		System.out.println("We recommended: " + person.getDiet());
-		System.out.print("Choose which diet number you wish to start with:");
+		System.out.println("We recommend: " + person.getDiet());
+		System.out.print("Choose which diet number you wish to start with: ");
 		int recommendedDiet = person.getDiet().getDietNumber();
 		int dietChoice = keyboard.nextInt();
 		while(dietChoice < 1 || dietChoice > 4) {
@@ -142,10 +142,10 @@ public class Main {
 				calChoice = keyboard.nextInt();
 			}
 			if(calChoice == 1) {
-				System.out.print("How many calories would you like to add?");
+				System.out.print("How many calories would you like to add? ");
 				int calAmount = keyboard.nextInt();
 				while(calAmount <= 0) {
-					System.out.println("Invalid! Please enter a valid calorie amount?");
+					System.out.println("Invalid! Please enter a valid calorie amount ");
 					calAmount = keyboard.nextInt();
 				}
 				System.out.println(day.addCalories(calAmount));
