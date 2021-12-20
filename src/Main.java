@@ -156,5 +156,6 @@ public class Main {
 		}
 	}
 }
-/*we need figure out how to keep track of day and then instantiate the day object
-and test the method we created. */
+/*https://www.momsteam.com/nutrition/sports-nutrition-basics/nutritional-needs-guidelines/carbohydrate-and-calorie-content-of-foods
+add common food calories
+*/
