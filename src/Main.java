@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.util.*;
 public class Main {
-	
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		Person person = createProfile(keyboard);
@@ -11,7 +10,6 @@ public class Main {
 		System.out.println("\n" + person.getDiet().toString());
 		
 		calorieCounter(keyboard, person);
-
 	}
 	
 	public static void menu() {
@@ -77,6 +75,7 @@ public class Main {
 		
 		return new Person(name, age, height, weight, gender, exercise);
 	}
+	
 	public static Exercise getExercise(Scanner keyboard) {
 		System.out.print("Choose a category number: ");
 		Exercise exercise = Exercise.LITTLE;
@@ -155,6 +154,29 @@ public class Main {
 			}
 		}
 	}
+	/*
+	public void createFoodCalList() {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("Chocolate Milk(cup)", 208);
+		map.put("Skim Milk(cup)", 86);
+		map.put("Apple", 81);
+		map.put("Apple Juice(cup)", 111);
+		map.put("Apple Sauce(cup)", 232);
+		map.put("Banana", 105);
+		map.put("Orange", 65);
+		map.put("Pear", 98);
+		map.put("Bagel", 165);
+		map.put("Slice White Bread", 61);
+		map.put("Slice WW Bread", 55);
+		map.put("Corn Bread", 178);
+		map.put("Hot dog bun", 119);
+		map.put("Pizza", 290);
+		map.put("Popcorn", 26);
+		map.put("Saltines(5 Crackers)",60);
+		map.put("Noodles", 159);
+		map.put("Graham Crackers(2 squares", 60);
+		map.put("Fruit Roll-Ups", 50);
+	}*/
 }
 /*https://www.momsteam.com/nutrition/sports-nutrition-basics/nutritional-needs-guidelines/carbohydrate-and-calorie-content-of-foods
 add common food calories

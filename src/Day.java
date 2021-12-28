@@ -23,7 +23,7 @@ public class Day {
 		}else if(currentCalories == maxCalories) {
 			return "You have reached your daily calorie allowance.";
 		}else if(currentCalories > (maxCalories - 100)){
-			return "Warning! You have almost reached your max calorie allowance. You have " + (maxCalories - currentCalories) + " calories left." ;
+			return "Warning! You have almost reached your max calorie allowance. You have " + (maxCalories - currentCalories) + " calories left.";
 		}else {
 			return "";
 		}
