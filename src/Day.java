@@ -28,9 +28,11 @@ public class Day {
 			return "";
 		}
 	}
+	
 	public int getCurrentCalories() {
 		return currentCalories;
 	}
+	
 	public int getMaxCalories() {
 		return maxCalories;
 	}

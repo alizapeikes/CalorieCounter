@@ -12,6 +12,7 @@ public class Main {
 		System.out.println("\n" + person.getDiet().toString());
 		
 		calorieCounter(keyboard, person);
+		System.exit(0);
 	}
 	
 	public static void menu() {
