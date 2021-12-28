@@ -136,7 +136,7 @@ public class Main {
 				day = new Day(person.getDiet().getCalories());
 			}
 			System.out.println("\n1. Add Calories");
-			System.out.println("2. Check Calorie Counter");
+			System.out.println("2. Check Calorie Count");
 			System.out.println("3. Exit program");
 			System.out.print("Please choose an option:");
 			calChoice = keyboard.nextInt();
@@ -144,6 +144,7 @@ public class Main {
 				System.out.println("Invalid choice. Please enter a valid choice");
 				calChoice = keyboard.nextInt();
 			}
+			System.out.println();
 			if(calChoice == 1) {
 				addCalories(keyboard, day, foodList);
 			}else if(calChoice == 2) {
@@ -155,32 +156,31 @@ public class Main {
 	
 	public static HashMap<String, Integer> createFoodCalList() {
 		HashMap<String, Integer> map = new HashMap<>();
-		map.put("Chocolate Milk(cup)", 208);
-		map.put("Skim Milk(cup)", 86);
-		map.put("Apple", 81);
-		map.put("Apple Juice(cup)", 111);
-		map.put("Apple Sauce(cup)", 232);
-		map.put("Banana", 105);
-		map.put("Orange", 65);
-		map.put("Pear", 98);
-		map.put("Bagel", 165);
-		map.put("Slice White Bread", 61);
-		map.put("Slice WW Bread", 55);
-		map.put("Corn Bread", 178);
-		map.put("Hot dog bun", 119);
-		map.put("Pizza", 290);
-		map.put("Popcorn", 26);
-		map.put("Saltines(5 Crackers)",60);
-		map.put("Noodles", 159);
-		map.put("Graham Crackers(2 squares)", 60);
-		map.put("Fruit Roll-Ups", 50);
+		map.put("CHOCOLATE MILK(CUP)", 208);
+		map.put("SKIM MILK(CUP)", 86);
+		map.put("APPLE", 81);
+		map.put("APPLE JUICE(CUP)", 111);
+		map.put("APPLE SAUCE(CUP)", 232);
+		map.put("BANANA", 105);
+		map.put("ORANGE", 65);
+		map.put("PEAR", 98);
+		map.put("BAGEL", 165);
+		map.put("SLICE WHITE BREAD", 61);
+		map.put("SLICE WW BREAD", 55);
+		map.put("HOT DOG BUN", 119);
+		map.put("PIZZA", 290);
+		map.put("POPCORN", 26);
+		map.put("SALTINES(5)",60);
+		map.put("NOODLES", 159);
+		map.put("GRAHAM CRACKERS(2)", 60);
+		map.put("FRUIT ROLL-UPS", 50);
 		return map;
 	}
 
 	private static void addCalories(Scanner keyboard, Day day, HashMap<String, Integer> foodList) {
 		System.out.println("\n1. Display food list");
-		System.out.println("2. Add food");
-		System.out.println("3. Add calorie amount");
+		System.out.println("2. Add calorie number");
+		System.out.println("3. Add food");
 		System.out.print("Please choose an option:");
 		
 		int choice = keyboard.nextInt();
@@ -190,9 +190,30 @@ public class Main {
 		}
 		
 		if(choice == 1) {
-			System.out.println("displaying food soon");
 			displayFood(foodList);
 		}
+		else if(choice == 2) {
+			addCalorieNumber(keyboard, day);
+		}
+		else if(choice == 3) {
+			addFood(foodList, keyboard, day);
+		}
+		
+	}
+
+	private static void displayFood(HashMap<String, Integer> foodList) {
+		StringBuilder str = new StringBuilder();
+		System.out.println("\n\t\tList");
+		for(String food: foodList.keySet()) {
+			str.append(food + " " + foodList.get(food));
+			System.out.printf("%-22s %22d %n", food,foodList.get(food));
+		}
+		//System.out.println(str.toString());
+		JOptionPane messageBox = new JOptionPane(str.toString());
+		messageBox.show();
+	}
+	
+	private static void addCalorieNumber(Scanner keyboard, Day day) {
 		System.out.print("How many calories would you like to add? ");
 		int calAmount = keyboard.nextInt();
 		while(calAmount <= 0) {
@@ -200,16 +221,23 @@ public class Main {
 			calAmount = keyboard.nextInt();
 		}
 		System.out.println(day.addCalories(calAmount));
+		System.out.println(calAmount + " added to your daily count");
 	}
 	
-	private static void displayFood(HashMap<String, Integer> foodList) {
-		StringBuilder str = new StringBuilder();
-		for(String food: foodList.keySet()) {
-			str.append(food + ": " + foodList.get(food) + "\n");
+	private static void addFood(HashMap<String, Integer> foodList, Scanner keyboard, Day day) {
+		System.out.println("Which food would you like to add to your overall calorie intake?");
+		System.out.println("Note: please enter the food exactly as it appears on the list");
+		keyboard.nextLine();
+		String food = keyboard.nextLine().toUpperCase();
+		while(!foodList.containsKey(food)) {
+			System.out.println("Invalid entry. Please enter the food name as it appears on the list");
+			food = keyboard.nextLine().toUpperCase();
 		}
-		System.out.println(str.toString());
-		JOptionPane.showMessageDialog(null, str.toString());
+		day.addCalories(foodList.get(food));
+		System.out.println(foodList.get(food) + " calories added to your daily count");
 	}
+	
+	
 }
 /*https://www.momsteam.com/nutrition/sports-nutrition-basics/nutritional-needs-guidelines/carbohydrate-and-calorie-content-of-foods
 add common food calories
