@@ -39,8 +39,7 @@ public class Person {
 			case VERY_HEAVY:
 				caloriesNeeded = BMR * 2;
 				break;		
-		}
-			
+		}		
 	}
 	
 	public void setDiet() {
@@ -65,14 +64,5 @@ public class Person {
 			BMR = 665 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
 		}
 	}
-	
-	/*
-	 * https://www.calculator.net/calorie-calculator.html?ctype=standard&cage=70&csex=f&cheightfeet=5&cheightinch=6&cpound=160&cheightmeter=180&ckg=65&cactivity=1.375&cmop=0&coutunit=c&cformula=m&cfatpct=20&printit=0&x=94&y=22
-	 * we are going to display all the different diet option before we display the recommended diet.
-	 * We want to make a while loop for the duration of the diet
-	 * every new day, the total calories restarts from zero. 
-	 */
-	
-
 }
 
