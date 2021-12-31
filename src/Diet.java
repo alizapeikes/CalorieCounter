@@ -1,5 +1,4 @@
 public class Diet {
-
 	private double BMI;
 	private double caloriesNeeded;
 	private int adjustedCalories;

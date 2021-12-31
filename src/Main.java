@@ -1,8 +1,9 @@
+import java.awt.GraphicsConfiguration;
 import java.time.LocalDate;
 import java.util.*;
-import javax.swing.JOptionPane;
 
-public class Main {
+
+public class Main { 
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		Person person = createProfile(keyboard);
@@ -12,6 +13,8 @@ public class Main {
 		System.out.println("\n" + person.getDiet().toString());
 		
 		calorieCounter(keyboard, person);
+		System.out.println("\nThank you for using our calorie counter app.");
+		System.out.println("We would love to hear your feedback at feedback@caloriecounter.com");
 		System.exit(0);
 	}
 	
@@ -131,10 +134,6 @@ public class Main {
 		int today = LocalDate.now().getDayOfYear();
 		Day day = new Day(person.getDiet().getCalories());
 		while(calChoice != 3) {
-			if(LocalDate.now().getDayOfYear() != today) {
-				today = LocalDate.now().getDayOfYear();
-				day = new Day(person.getDiet().getCalories());
-			}
 			System.out.println("\n1. Add Calories");
 			System.out.println("2. Check Calorie Count");
 			System.out.println("3. Exit program");
@@ -145,6 +144,10 @@ public class Main {
 				calChoice = keyboard.nextInt();
 			}
 			System.out.println();
+			if(LocalDate.now().getDayOfYear() != today) {
+				today = LocalDate.now().getDayOfYear();
+				day = new Day(person.getDiet().getCalories());
+			}
 			if(calChoice == 1) {
 				addCalories(keyboard, day, foodList);
 			}else if(calChoice == 2) {
@@ -179,38 +182,58 @@ public class Main {
 
 	private static void addCalories(Scanner keyboard, Day day, HashMap<String, Integer> foodList) {
 		System.out.println("\n1. Display food list");
-		System.out.println("2. Add calorie number");
-		System.out.println("3. Add food");
+		System.out.println("2. Add food/calorie amount to list");
+		System.out.println("3. Add calorie number");
+		System.out.println("4. Add food");
 		System.out.print("Please choose an option:");
 		
 		int choice = keyboard.nextInt();
-		while(choice < 1 || choice > 3) {
+		while(choice < 1 || choice > 4) {
 			System.out.println("Invalid choice. Please enter a valid choice");
 			choice = keyboard.nextInt();
 		}
 		
 		if(choice == 1) {
 			displayFood(foodList);
+			addCalories(keyboard, day, foodList);
 		}
 		else if(choice == 2) {
-			addCalorieNumber(keyboard, day);
+			addFoodToList(keyboard, foodList);
 		}
 		else if(choice == 3) {
+			addCalorieNumber(keyboard, day);
+		}
+		else if(choice == 4) {
 			addFood(foodList, keyboard, day);
 		}
 		
 	}
 
-	private static void displayFood(HashMap<String, Integer> foodList) {
-		StringBuilder str = new StringBuilder();
-		System.out.println("\n\t\tList");
-		for(String food: foodList.keySet()) {
-			str.append(food + " " + foodList.get(food));
-			System.out.printf("%-22s %22d %n", food,foodList.get(food));
+	
+	private static void addFoodToList(Scanner keyboard, HashMap<String, Integer> foodList) {
+		keyboard.nextLine();
+		System.out.print("Please enter the name of the food: ");
+		String food = keyboard.nextLine().toUpperCase();
+
+		if(foodList.containsKey(food)) {
+			System.out.println("Food already exists!");
+			return;
 		}
-		//System.out.println(str.toString());
-		JOptionPane messageBox = new JOptionPane(str.toString());
-		messageBox.show();
+		
+		System.out.print("Please enter the calorie amount: ");
+		int calAmount = keyboard.nextInt();
+		foodList.put(food, calAmount);
+
+	
+	}
+
+	private static void displayFood(HashMap<String, Integer> foodList) {
+		String str2 = "Food List\n";
+		for(String food: foodList.keySet()) {
+			str2 += String.format("%-15d %-15s%n", foodList.get(food), foodList.get(food)>=100 ? food: " " + food);
+			//System.out.printf("%-22s %22d %n", food,foodList.get(food));
+		}
+		new FoodOptionsPane(str2.toString());
 	}
 	
 	private static void addCalorieNumber(Scanner keyboard, Day day) {
@@ -239,6 +262,3 @@ public class Main {
 	
 	
 }
-/*https://www.momsteam.com/nutrition/sports-nutrition-basics/nutritional-needs-guidelines/carbohydrate-and-calorie-content-of-foods
-add common food calories
-*/
