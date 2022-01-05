@@ -54,10 +54,11 @@ public class Person {
 	
 	public void setBMI() { 
 		BMI = (weight/Math.pow(height, 2)) * 703;
-		BMI = Math.round(BMI * 10) / 10;
+		BMI = Math.round(BMI * 10) / 10; //Rounding BMI
 	}
 	
 	public void setBMR() {
+		//BMR calculation differentiates between male and female
 		if(gender == Gender.MALE) {
 			BMR = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
 		}else {

@@ -1,7 +1,7 @@
 public class Diet {
 	private double BMI;
 	private double caloriesNeeded;
-	private int adjustedCalories;
+	private int requestedCalorieGoal;
 	private String name;
 	
 	public String getName() {
@@ -13,11 +13,11 @@ public class Diet {
 	}
 
 	public int getCalories() {
-		return adjustedCalories;
+		return requestedCalorieGoal;
 	}
 
 	public void setCalories(int calories) {
-		this.adjustedCalories = calories;
+		this.requestedCalorieGoal = calories;
 	}
 	
 	public int getDietNumber() {
@@ -35,19 +35,19 @@ public class Diet {
 	public void setDiet(int diet) {
 		if(diet == 1) {
 			name = "Weight Gain";
-			adjustedCalories = Math.round((float)(caloriesNeeded * 1.2 /10)) * 10;
+			requestedCalorieGoal = Math.round((float)(caloriesNeeded * 1.2 /10)) * 10;
 		}
 		if(diet == 2) {
 			name = "Maintenance";
-			adjustedCalories = Math.round((float)(caloriesNeeded /10)) * 10;
+			requestedCalorieGoal = Math.round((float)(caloriesNeeded /10)) * 10;
 		}
 		if(diet == 3) {
 			name = "Weight Loss";
-			adjustedCalories = Math.round((float)(caloriesNeeded * .8 /10)) * 10;
+			requestedCalorieGoal = Math.round((float)(caloriesNeeded * .8 /10)) * 10;
 		}
 		if(diet==4) {
 			name = "Extreme Weight Loss";
-			adjustedCalories = Math.round((float)(caloriesNeeded * .6 /10))*10;
+			requestedCalorieGoal = Math.round((float)(caloriesNeeded * .6 /10))*10;
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class Diet {
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append(name);
-		string.append("\nGoal calories per day: " + adjustedCalories);
+		string.append("\nGoal calories per day: " + requestedCalorieGoal);
 		return string.toString();
 	}
 }

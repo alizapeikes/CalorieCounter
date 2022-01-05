@@ -16,14 +16,7 @@ public class Main {
 		System.exit(0);
 	}
 	
-	public static void menu() {
-		System.out.println("Standard Daily Exercise:");
-		System.out.println("1. Little(to no exercise)");
-		System.out.println("2. Light(1-3 days per week)");
-		System.out.println("3. Moderate(3-5 days per week)");
-		System.out.println("4. Heavy(6-7 days per week)");
-		System.out.println("5. Very Heavy(twice per day, extra heavy workouts)");
-	}
+	
 	
 	public static Person createProfile(Scanner keyboard) {
 		System.out.print("User's name: ");
@@ -64,21 +57,23 @@ public class Main {
 			gender = Gender.FEMALE;
 		}
 		
-		menu();
+		exerciseMenu();
 		Exercise exercise = getExercise(keyboard);
 		
-		if(age < 18) {
-			System.out.println("As a child, recommended exercise is 1 hour of daily physical activity. ");
-		}
-		else if(age >= 18 && age <= 64) {
-			System.out.println("As an adult, recommended exercise is 2 hours and 30 minutes a week. ");
-		}
-		else {
-			System.out.println("As an older adult, recommended exercise is based on ability and condition of the individual. ");
-		}
+		displayRecExercise(age);
 		
 		return new Person(name, age, height, weight, gender, exercise);
 	}
+	
+	public static void exerciseMenu() {
+		System.out.println("Standard Daily Exercise:");
+		System.out.println("1. Little(to no exercise)");
+		System.out.println("2. Light(1-3 days per week)");
+		System.out.println("3. Moderate(3-5 days per week)");
+		System.out.println("4. Heavy(6-7 days per week)");
+		System.out.println("5. Very Heavy(twice per day, extra heavy workouts)");
+	}
+	
 	
 	public static Exercise getExercise(Scanner keyboard) {
 		System.out.print("Choose a category number: ");
@@ -109,6 +104,18 @@ public class Main {
 		return exercise;
 	}
 	
+	private static void displayRecExercise(int age) {
+		if(age < 18) {
+			System.out.println("As a child, recommended exercise is 1 hour of daily physical activity. ");
+		}
+		else if(age >= 18 && age <= 64) {
+			System.out.println("As an adult, recommended exercise is 2 hours and 30 minutes a week. ");
+		}
+		else {
+			System.out.println("As an older adult, recommended exercise is based on ability and condition of the individual. ");
+		}
+	}
+	
 	public static void chooseDiet(Scanner keyboard, Person person) {
 		System.out.println("\nWe have four diet options available");
 		System.out.println("1. Weight Gain \n2. Maintenance \n3. Weight Loss \n4. Extreme weight loss");
@@ -129,10 +136,9 @@ public class Main {
 	public static void calorieCounter(Scanner keyboard, Person person) {
 		HashMap<String, Integer> foodList = createFoodCalList();
 		int calChoice = 0;
-		int today = LocalDate.now().getDayOfYear();
 		Day day = new Day(person.getDiet().getCalories());
 		while(calChoice != 3) {
-			System.out.println("\n1. Add Calories");
+			System.out.println("\n1. Add Calorie Intake");
 			System.out.println("2. Check Calorie Count");
 			System.out.println("3. Exit program");
 			System.out.print("Please choose an option:");
@@ -142,10 +148,7 @@ public class Main {
 				calChoice = keyboard.nextInt();
 			}
 			System.out.println();
-			if(LocalDate.now().getDayOfYear() != today) {
-				today = LocalDate.now().getDayOfYear();
-				day = new Day(person.getDiet().getCalories());
-			}
+			day.checkDate();
 			if(calChoice == 1) {
 				addCalories(keyboard, day, foodList);
 			}else if(calChoice == 2) {
@@ -180,9 +183,9 @@ public class Main {
 
 	private static void addCalories(Scanner keyboard, Day day, HashMap<String, Integer> foodList) {
 		System.out.println("\n1. Display food list");
-		System.out.println("2. Add food/calorie amount to list");
-		System.out.println("3. Add calorie number");
-		System.out.println("4. Add food");
+		System.out.println("2. Add food/calorie to food list");
+		System.out.println("3. Add calorie intake");
+		System.out.println("4. Add food intake");
 		System.out.print("Please choose an option:");
 		
 		int choice = keyboard.nextInt();
@@ -226,10 +229,9 @@ public class Main {
 	}
 
 	private static void displayFood(HashMap<String, Integer> foodList) {
-		String str2 = "Food List\n";
+		String str2 = "CALORIES     FOOD\n";
 		for(String food: foodList.keySet()) {
 			str2 += String.format("%-15d %-15s%n", foodList.get(food), foodList.get(food)>=100 ? food: " " + food);
-			//System.out.printf("%-22s %22d %n", food,foodList.get(food));
 		}
 		new FoodOptionsPane(str2.toString());
 	}
@@ -242,7 +244,6 @@ public class Main {
 			calAmount = keyboard.nextInt();
 		}
 		System.out.println(day.addCalories(calAmount));
-		System.out.println(calAmount + " added to your daily count");
 	}
 	
 	private static void addFood(HashMap<String, Integer> foodList, Scanner keyboard, Day day) {
@@ -252,6 +253,7 @@ public class Main {
 		String food = keyboard.nextLine().toUpperCase();
 		while(!foodList.containsKey(food)) {
 			System.out.println("Invalid entry. Please enter the food name as it appears on the list");
+			displayFood(foodList);
 			food = keyboard.nextLine().toUpperCase();
 		}
 		day.addCalories(foodList.get(food));
