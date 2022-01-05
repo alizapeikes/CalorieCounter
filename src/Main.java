@@ -66,7 +66,7 @@ public class Main {
 	}
 	
 	public static void exerciseMenu() {
-		System.out.println("Standard Daily Exercise:");
+		System.out.println("\nStandard Weekly Exercise:");
 		System.out.println("1. Little(to no exercise)");
 		System.out.println("2. Light(1-3 days per week)");
 		System.out.println("3. Moderate(3-5 days per week)");
@@ -119,7 +119,7 @@ public class Main {
 	public static void chooseDiet(Scanner keyboard, Person person) {
 		System.out.println("\nWe have four diet options available");
 		System.out.println("1. Weight Gain \n2. Maintenance \n3. Weight Loss \n4. Extreme weight loss");
-		System.out.println("We recommend: " + person.getDiet());
+		System.out.println("\nBased on your profile we recommend " + person.getDiet() + " \nYou can pick any of our diet options, though");
 		System.out.print("Choose which diet number you wish to start with: ");
 		int recommendedDiet = person.getDiet().getDietNumber();
 		int dietChoice = keyboard.nextInt();
@@ -139,7 +139,7 @@ public class Main {
 		Day day = new Day(person.getDiet().getCalories());
 		while(calChoice != 3) {
 			System.out.println("\n1. Add Calorie Intake");
-			System.out.println("2. Check Calorie Count");
+			System.out.println("2. Check Today's Calorie Count");
 			System.out.println("3. Exit program");
 			System.out.print("Please choose an option:");
 			calChoice = keyboard.nextInt();
@@ -152,7 +152,7 @@ public class Main {
 			if(calChoice == 1) {
 				addCalories(keyboard, day, foodList);
 			}else if(calChoice == 2) {
-				System.out.println("Current calorie count: " +  day.getCurrentCalories());
+				System.out.println("Today's calorie count: " +  day.getCurrentCalories());
 				System.out.println("Remaining calories: " + (day.getMaxCalories() - day.getCurrentCalories()));
 			}
 		}
@@ -177,7 +177,7 @@ public class Main {
 		map.put("SALTINES(5)",60);
 		map.put("NOODLES", 159);
 		map.put("GRAHAM CRACKERS(2)", 60);
-		map.put("FRUIT ROLL-UPS", 50);
+		map.put("FRUIT ROLL-UP", 50);
 		return map;
 	}
 
@@ -229,7 +229,7 @@ public class Main {
 	}
 
 	private static void displayFood(HashMap<String, Integer> foodList) {
-		String str2 = "CALORIES     FOOD\n";
+		String str2 = "CALORIES    FOOD\n";
 		for(String food: foodList.keySet()) {
 			str2 += String.format("%-15d %-15s%n", foodList.get(food), foodList.get(food)>=100 ? food: " " + food);
 		}
@@ -237,7 +237,7 @@ public class Main {
 	}
 	
 	private static void addCalorieNumber(Scanner keyboard, Day day) {
-		System.out.print("How many calories would you like to add? ");
+		System.out.print("How many calories would you like to add to your daily count? ");
 		int calAmount = keyboard.nextInt();
 		while(calAmount <= 0) {
 			System.out.println("Invalid! Please enter a valid calorie amount ");

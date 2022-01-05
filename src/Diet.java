@@ -21,7 +21,7 @@ public class Diet {
 	}
 	
 	public int getDietNumber() {
-		if(name.equals("Weight Loss")) 
+		if(name.equals("Weight Gain")) 
 			return 1;
 		if(name.equals("Maintenance"))
 			return 2;
