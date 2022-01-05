@@ -106,13 +106,13 @@ public class Main {
 	
 	private static void displayRecExercise(int age) {
 		if(age < 18) {
-			System.out.println("As a child, recommended exercise is 1 hour of daily physical activity. ");
+			System.out.println("Fun Fact: As a child, recommended exercise is 1 hour of daily physical activity. ");
 		}
 		else if(age >= 18 && age <= 64) {
-			System.out.println("As an adult, recommended exercise is 2 hours and 30 minutes a week. ");
+			System.out.println("Fun Fact: As an adult, recommended exercise is 2 hours and 30 minutes a week. ");
 		}
 		else {
-			System.out.println("As an older adult, recommended exercise is based on ability and condition of the individual. ");
+			System.out.println("Fun Fact: As an older adult, recommended exercise is based on ability and condition of the individual. ");
 		}
 	}
 	
